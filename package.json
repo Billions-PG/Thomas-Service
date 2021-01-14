@@ -1,0 +1,29 @@
+{
+  "name": "recommend",
+  "version": "1.0.0",
+  "description": "recommend module for etsy-like webApp",
+  "main": "index.js",
+  "scripts": {
+    "test:db": "jest ./database/test/dbTest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://pgonz18@github.com/GoHuLa/Recommend.git"
+  },
+  "author": "pablo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoHuLa/Recommend/issues"
+  },
+  "homepage": "https://github.com/GoHuLa/Recommend#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "mocha": "^8.2.1",
+    "mongo-seeding": "^3.5.0",
+    "mongoose": "^5.11.11",
+    "nodemon": "^2.0.7"
+  }
+}
