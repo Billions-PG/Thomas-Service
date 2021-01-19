@@ -20,7 +20,7 @@ describe('insert', () => {
     await Item.deleteMany();
   });
 
-  it('should insert a doc into collection', async () => {
+  it('should insert a doc into collection with right shape', async () => {
     const item = await new Item({
       _id: 15333,
       name: 'punisher',
@@ -42,7 +42,7 @@ describe('insert', () => {
         similarProduct: [4, 3, 55, 2],
       },
     });
-    await item.save().then(() => console.log('item saved'));
+    await item.save();
     const testItem = await Item.findOne({ _id: 15333 });
     expect(testItem.name).toEqual('punisher');
     expect(new Set(testItem.recommended.fromShop)).toContain(88);

@@ -16,10 +16,4 @@ const collections = seeder.readCollectionsFromPath(
 );
 
 seeder
-  .import(collections)
-  .then(() => {
-    console.info('Success');
-  })
-  .catch((err) => (
-    console.log('Error', err)
-  ));
+  .import(collections);
