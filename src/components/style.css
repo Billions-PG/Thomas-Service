@@ -1,0 +1,40 @@
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+h3 {
+  font-weight: 300;
+}
+
+#app {
+  background-color: #F8EBE6;
+}
+
+.card {
+  transition: background-color .1s, box-shadow .1s;
+  background-color: #F8EBE6;
+  border-radius: 10px;
+  border-style: none;
+}
+
+.card:hover {
+  background-color: white;
+  box-shadow: .5px .5px -.5px -.5px rgba(27, 27, 27, 0.589);
+  cursor: pointer;
+}
+
+button {
+  border-radius: 20px;
+  margin-right: 40px;
+  background: transparent;
+}
+
+.sale {
+  text-decoration: line-through;
+  color: #91C29B;
+}
+
+.percent {
+  color: #91C29B;
+
+}
