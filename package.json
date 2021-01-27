@@ -34,7 +34,8 @@
     "mongoose": "^5.11.11",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.3",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

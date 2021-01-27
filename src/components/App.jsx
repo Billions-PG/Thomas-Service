@@ -113,11 +113,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    this.fetchData('/product/1');
   }
 
-  fetchData() {
-    axios.get(`/item/${2}`)
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) this.fetchData(this.props.location.pathname);
+  }
+
+  fetchData(path) {
+    axios.get(path)
       .then((res) => this.setState({
         alsoItems: res.data[0],
         shopItems: res.data[1],

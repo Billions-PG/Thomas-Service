@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json());
 
-app.get('/item/:id', (req, res) => {
+app.get('/product/:id', (req, res) => {
   Item.findById(req.params.id, 'shopName similarProduct').exec()
     .then((data) => {
       Item.find({ shopName: data.shopName }).exec()
