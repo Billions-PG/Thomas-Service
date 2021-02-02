@@ -49,7 +49,7 @@ describe('insert', () => {
     expect(testItem.updated_at).toBeTruthy();
   });
   it('should do GET', async () => {
-    const result = await request(app).get(`/item/${15333}`);
+    const result = await request(app).get(`/product/${15333}`);
     expect(result.body).toHaveLength(2);
   });
 });

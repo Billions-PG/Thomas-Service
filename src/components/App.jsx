@@ -111,13 +111,22 @@ class App extends React.Component {
       alsoItems: testAlso,
     };
   }
-
+//http://54.90.53.234:3003 joey
+//http://52.53.221.54:3003 jon
+//http://3.15.40.71:3003 pab
   componentDidMount() {
-    this.fetchData();
+    this.fetchData(`http://3.15.40.71:3003/product/${this.props.match.params.id}`);
   }
 
-  fetchData() {
-    axios.get(`/item/${2}`)
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.fetchData(`http://3.15.40.71:3003/product/${this.props.match.params.id}`);
+      window.scrollTo(0, 0);
+    }
+  }
+
+  fetchData(path) {
+    axios.get(path)
       .then((res) => this.setState({
         alsoItems: res.data[0],
         shopItems: res.data[1],
@@ -128,7 +137,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Container fluid className="d-flex justify-content-center row align-items-center">
+        <Container fluid className="pt-5 mt-5 d-flex justify-content-center row align-items-center">
             <Col className="ml-4">
               <h3>More from this shop</h3>
             </Col>

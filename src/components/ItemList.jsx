@@ -7,7 +7,8 @@ import CardDeck from 'react-bootstrap/CardDeck';
 import Item from './Item.jsx';
 
 const ItemList = ({ shopItems, alsoItems }) => (
-  <Container fluid className="d-flex align-self-center">
+
+ <Container fluid className="d-flex align-self-center">
     <Container className="w-50 p-2">
       <Row className="m-0">
         <CardDeck className="w-100 m-1">
