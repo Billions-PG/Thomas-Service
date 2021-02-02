@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 const Item = (props) => (
 
-      <Card border="light" className="w-25 m-1"> <Link to={`/product/${props.item._id}`}>
-
+      <Card border="light" className="w-25 m-1">
+      <Link to={`/product/${props.item._id}`}>
         <Card.Img variant="top" className="p-2" style={{ borderRadius: 15 }} src={props.item.imageUrl} />
         <Card.Body className="p-1">
           <Card.Text className="mb-0 text-truncate">{props.item.name}</Card.Text>

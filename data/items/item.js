@@ -560,7 +560,7 @@ const recommend = [
 const products = productName.map((product, i) => ({
   _id: i + 1,
   name: product,
-  imageUrl: `https://picsum.photos/id/${i + 230}/400/300`,
+  imageUrl: `https://picsum.photos/id/${i + 100}/400/300`,
   shopName: faker.helpers.randomize(shopNames),
   price: {
     display: `$${priceValues[i]}`,
