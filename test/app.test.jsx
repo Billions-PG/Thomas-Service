@@ -4,14 +4,17 @@ import { shallow } from './enzyme';
 
 describe('should properly render App page', () => {
   let wrapper;
+  const paraId = {
+    match: {
+      params: {
+        id: 1
+      }
+    }
+  };
 
   beforeEach(() => {
-    wrapper = shallow(<App />);
+    wrapper = shallow(<App {...paraId}/>);
   });
-
-  // test('renders correctly enzyme', () => {
-  //   expect(toJson(wrapper)).toMatchSnapshot();
-  // });
 
   test('contains a container for title and buttons', () => {
     expect(wrapper.find('Container')).toHaveLength(1);
