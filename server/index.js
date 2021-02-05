@@ -27,8 +27,11 @@ app.get('/product/:id', (req, res) => {
       Item.find({ shopName: data.shopName }).exec()
         .then((shops) => {
           Item.find({ _id: { $in: data.similarProduct } }).exec((err, sim) => {
-            const similarItems = randomizeArray(sim);
-            const similarShops = randomizeArray(shops);
+            console.log('sim length', sim[0], 'shops length', shops[0]);
+            // const similarItems = randomizeArray(sim);
+            const similarItems = sim;
+            // const similarShops = randomizeArray(shops);
+            const similarShops = shops;
             if (err) res.status(400).send(err);
             res.status(200).send([similarItems, similarShops]);
           });

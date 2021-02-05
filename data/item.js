@@ -1,4 +1,6 @@
 const faker = require('faker');
+const fs = require('fs');
+
 
 const productName = [
   'monitor needs-based enable hat',
@@ -115,7 +117,7 @@ const shopNames = [
   'awesomeDesign',
   'practicalFashion',
 ];
-
+// random prices with numbers between 1 and 100 with decimals to the 100th place
 const priceValues = [
   95.75, 55.99, 33.75, 24.25, 21.75, 8.99, 0.25, 86.75, 72.99,
   52.25, 31.99, 2.25, 66, 38.75, 48, 10.25, 87.99, 8.99,
@@ -131,7 +133,10 @@ const priceValues = [
   54,
 ];
 
+// random arrays length 1-10
+// with random integers between 1-10million
 const recommend = [
+
   [
     72, 99, 51, 16, 100, 9,
     38, 7, 37, 72, 8, 24,
@@ -556,35 +561,114 @@ const recommend = [
     64, 91, 70,
   ],
 ];
+//change to for each loop that runs X amount of times picking a random product name, random price, random recommended item between 1 and X
 
-const products = productName.map((product, i) => ({
-  _id: i + 1,
-  name: product,
-  imageUrl: `https://picsum.photos/id/${i + 100}/400/300`,
-  shopName: faker.helpers.randomize(shopNames),
-  price: {
-    display: `$${priceValues[i]}`,
-    worth: priceValues[i],
-    onSale: faker.helpers.randomize([true, false]),
+const seedProducts = fs.createWriteStream('products.csv');
+seedProducts.write('imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice\n', 'utf8');
 
-  },
-  shipping: {
-    eligibility: faker.helpers.randomize([true, false]),
-    display: '',
-  },
-  similarProduct: recommend[i],
-}));
-
-products.forEach((item) => {
-  const theItem = item;
-  if (item.price.onSale) {
-    const ranPercent = faker.helpers.randomize([0.10, 0.15, 0.20, 0.25, 0.30, 0.50, 0.75]);
-    theItem.price.salePercentage = ranPercent;
-    theItem.price.salePrice = `$${((1 - ranPercent) * theItem.price.worth).toFixed(2)}`;
+function createAndWriteProducts(writer, encoding, callback) {
+  let i = 10000000;
+  let id = 0;
+  function write() {
+    let ok = true;
+    do {
+      i -= 1;
+      let price = priceValues[faker.random.number(1, priceValues.length-1)];
+      let product = {
+        //id is set automatically
+        imageUrl: `https://picsum.photos/id/${i + 100}/400/300`,
+        productName: productName[faker.random.number(productName.length)],
+        displayPrice: `${price}`,
+        onSale: faker.helpers.randomize([true, false]),
+        worth: price,
+        shippingDisplay: '',
+        shippingEligibility: faker.helpers.randomize([true, false]),
+        salePrice: price,
+        salePercentage: 1,
+        fk_shop_id: faker.random.number({'min':1,'max':10}),
+      }
+      let ranPercent = faker.helpers.randomize([0.10, 0.15, 0.20, 0.25, 0.30, 0.50, 0.75])
+      if (product.onSale) {
+        product.salePercentage = ranPercent;
+        product.salePrice = `$${((1 - ranPercent) * product.worth).toFixed(2)}`;
+      }
+      if (product.shippingEligibility) {
+        product.shippingDisplay = 'Free shipping eligible';
+      }
+      const data = `${product.imageUrl},${product.productName},${product.displayPrice},${product.onSale},${product.worth},${product.shippingDisplay},${product.shippingEligibility},${product.salePercentage},${product.fk_shop_id},${product.salePrice}\n`;
+      if (i === 0) {
+        writer.write(data, encoding, callback);
+      } else {
+        // see if we should continue, or wait
+        // don't pass the callback, because we're not done yet.
+        ok = writer.write(data, encoding);
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      // had to stop early!
+      // write some more once it drains
+      writer.once('drain', write);
+    }
   }
-  if (theItem.shipping.eligibility) {
-    theItem.shipping.display = 'Free shipping eligible';
-  }
+  write()
+}
+createAndWriteProducts(seedProducts, 'utf-8', () => {
+  seedProducts.end();
 });
 
-module.exports = products;
+const seedShops = fs.createWriteStream('shops.csv');
+seedShops.write('shopName\n', 'utf8');
+function createAndWriteShops(writer, encoding, callback) {
+  let i = 10;
+  let id = 0;
+  function write() {
+    let ok = true;
+    do {
+      i -= 1;
+      let shopName = faker.helpers.randomize(shopNames);
+      let data = `${shopName}\n`;
+      if (i === 0) {
+        writer.write(data, encoding, callback);
+      } else {
+        ok = writer.write(data, encoding);
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      writer.once('drain', write);
+    }
+  }
+  write()
+}
+createAndWriteShops(seedShops, 'utf-8', () => {
+  seedShops.end();
+});
+
+const seedSimilarProducts = fs.createWriteStream('similarProducts.csv');
+seedSimilarProducts.write('shopName\n', 'utf8');
+function createAndWriteSimilarProducts(writer, encoding, callback) {
+  let i = 100000000;
+  let id = 0;
+  function write() {
+    let ok = true;
+    do {
+      i -= 1;
+
+      let fk_product_id = faker.random.number({'min':1,'max':100});
+      let fk_similarProduct_id = faker.random.number({'min':1,'max':100});
+      let data = `${fk_product_id},${fk_similarProduct_id}\n`;
+
+      if (i === 0) {
+        writer.write(data, encoding, callback);
+      } else {
+        ok = writer.write(data, encoding);
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      writer.once('drain', write);
+    }
+  }
+  write()
+}
+createAndWriteSimilarProducts(seedSimilarProducts, 'utf-8', () => {
+  seedSimilarProducts.end();
+});

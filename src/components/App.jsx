@@ -8,6 +8,14 @@ import ItemList from './ItemList.jsx';
 import './style.css';
 
 const testAlso = [
+// Front End Expects an array of these objects
+//   imageUrl: "https://picsum.photos/id/120/400/300"
+// name: "backing Baby long-sleeve"
+// price: {display: "$31", worth: 31, onSale: false}
+// shipping: {eligibility: true, display: "Free shipping eligible"}
+// shopName: "practicalGlobal"
+// similarProduct: (7) [78, 41, 49, 63, 20, 2, 57]
+// _id: 21
   {
     name: 'also1 is a very long message to test out the elipses, hopefully it works!',
     shopName: 'test1',
@@ -115,12 +123,12 @@ class App extends React.Component {
 //http://52.53.221.54:3003 jon
 //http://3.15.40.71:3003 pab
   componentDidMount() {
-    this.fetchData(`http://3.15.40.71:3003/product/${this.props.match.params.id}`);
+    this.fetchData(`http://localhost:3003/product/${this.props.match.params.id}`);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      this.fetchData(`http://3.15.40.71:3003/product/${this.props.match.params.id}`);
+      this.fetchData(`http://localhost:3003/product/${this.props.match.params.id}`);
       window.scrollTo(0, 0);
     }
   }
@@ -131,6 +139,9 @@ class App extends React.Component {
         alsoItems: res.data[0],
         shopItems: res.data[1],
       }))
+      .then(()=> {
+        console.log(this.state.alsoItems, this.state.shopItems);
+      })
       .catch((err) => err);
   }
 

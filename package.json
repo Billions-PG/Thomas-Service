@@ -7,9 +7,10 @@
     "test": "jest --coverage",
     "start": "nodemon ./server/routes.js",
     "lint": "./node_modules/.bin/eslint . --ignore-path ./.eslintignore --fix",
-    "seed": "DEBUG=mongo-seeding node index.js",
+    "seed": "node data/item.js",
     "build": "webpack --config webpack.config.js",
-    "dev": "webpack -w"
+    "dev": "webpack -w",
+    "schema": "psql -f ./database/schema.sql"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
-    "enzyme-to-json": "^3.6.1",
+    "enzyme-to-json": "^3.6.`1",
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "jquery": "^3.5.1",
