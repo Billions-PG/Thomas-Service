@@ -34,6 +34,7 @@
     "mongo-seeding": "^3.5.0",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.11",
+    "pg": "^8.5.1",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^16.14.0",

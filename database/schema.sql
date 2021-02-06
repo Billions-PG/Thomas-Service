@@ -25,32 +25,16 @@ salePrice VARCHAR(15),
 shippingDisplay VARCHAR(50),
 shippingEligibility BOOLEAN NOT NULL,
 fk_shop_id int NOT NULL,
+productType VARCHAR(25),
 CONSTRAINT fk_shop
   FOREIGN KEY(fk_shop_id)
     REFERENCES shops(id)
-);
-
-CREATE TABLE similarProduct (
-id BIGSERIAL PRIMARY KEY,
-fk_product_id int,
-fk_similarProduct_id int,
-
-CONSTRAINT fk_product_id
-  FOREIGN KEY(fk_product_id)
-    REFERENCES products(id),
-CONSTRAINT fk_related
-  FOREIGN KEY(fk_similarProduct_id)
-    REFERENCES products(id)
 );
 
 COPY shops(shopName)
 FROM '/Users/thomasmcnutt/hackreactor/SDC/Recommend/shops.csv'
 DELIMITER ',' CSV HEADER;
 
-COPY products(imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice)
+COPY products(productType,imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice)
 FROM '/Users/thomasmcnutt/hackreactor/SDC/Recommend/products.csv'
-DELIMITER ',' CSV HEADER;
-
-COPY similarProduct(fk_product_id, fk_similarProduct_id)
-FROM '/Users/thomasmcnutt/hackreactor/SDC/Recommend/similarProducts.csv'
 DELIMITER ',' CSV HEADER;
