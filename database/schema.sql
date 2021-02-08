@@ -32,9 +32,10 @@ CONSTRAINT fk_shop
 );
 
 COPY shops(shopName)
-FROM '/Users/thomasmcnutt/hackreactor/SDC/Recommend/shops.csv'
+/root/Database/Thomas-Service
+FROM '/root/Database/Thomas-Service/shops.csv'
 DELIMITER ',' CSV HEADER;
 
 COPY products(productType,imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice)
-FROM '/Users/thomasmcnutt/hackreactor/SDC/Recommend/products.csv'
+FROM '/root/Database/Thomas-Serviceproducts.csv'
 DELIMITER ',' CSV HEADER;
