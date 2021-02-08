@@ -227,7 +227,7 @@ createAndWriteProducts(seedProducts, 'utf-8', () => {
 const seedShops = fs.createWriteStream('shops.csv');
 seedShops.write('shopName\n', 'utf8');
 function createAndWriteShops(writer, encoding, callback) {
-  let i = 10;
+  let i = 10000000;
   let id = 0;
   function write() {
     let ok = true;
