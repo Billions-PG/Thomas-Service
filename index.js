@@ -1,19 +1,11 @@
 const path = require('path');
-const { Seeder } = require('mongo-seeding');
+var http = require('http');
+var fs = require('fs');
+var writeStream = fs.createWriteStream('./sampleJson.csv');
+writeStream.on('error', function (err) {
+  console.log(err);
+});
 
-const config = {
-  database: {
-    name: 'recommended',
-  },
-  dropDatabase: true,
-};
-const seeder = new Seeder(config);
-const collections = seeder.readCollectionsFromPath(
-  path.resolve('./data'),
-  {
-    transformers: [Seeder.Transformers.replaceDocumentIdWithUnderscoreId],
-  },
-);
-
-seeder
-  .import(collections);
+http.createServer(function(req, res) {
+  req.pipe(writeStream);
+}).listen(8080);
