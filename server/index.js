@@ -5,7 +5,7 @@ const cors = require('cors');
 const {Pool} = require('pg');
 
 const pool = new Pool({
-  user: 'thomasmcnutt',
+  user: 'postgres',
   host: 'localhost',
   database: 'billionspg',
   port: 5432,
