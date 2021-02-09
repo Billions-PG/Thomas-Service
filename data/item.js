@@ -177,7 +177,7 @@ function createAndWriteProducts(writer, encoding, callback) {
       let price = priceValues[faker.random.number(1, priceValues.length-1)];
       let product = {
         //id is set automatically
-        imageUrl: `https://picsum.photos/id/${i + 100}/400/300`,
+        imageUrl: `https://picsum.photos/id/${(i%100) + 100}/400/300`,
         productName: productName[faker.random.number(productName.length)],
         displayPrice: `${price}`,
         onSale: faker.helpers.randomize([true, false]),
