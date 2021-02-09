@@ -122,13 +122,14 @@ class App extends React.Component {
 //http://54.90.53.234:3003 joey
 //http://52.53.221.54:3003 jon
 //http://3.15.40.71:3003 pab
+// 18.144.9.15 service ec2
   componentDidMount() {
-    this.fetchData(`http://18.144.9.15:3003/api/product/${this.props.match.params.id}`);
+    this.fetchData(`http://localhost:3003/api/product/${this.props.match.params.id}`);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      this.fetchData(`http://18.144.9.15:3003/api/product/${this.props.match.params.id}`);
+      this.fetchData(`http://localhost:3003/api/product/${this.props.match.params.id}`);
       window.scrollTo(0, 0);
     }
   }
