@@ -32,7 +32,6 @@ CONSTRAINT fk_shop
 );
 
 COPY shops(shopName)
-/root/Database/Thomas-Service
 FROM '/home/ec2-user/Thomas-Service/shops.csv'
 DELIMITER ',' CSV HEADER;
 
