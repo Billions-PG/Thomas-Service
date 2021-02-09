@@ -31,10 +31,10 @@ CONSTRAINT fk_shop
     REFERENCES shops(id)
 );
 
-COPY shops(shopName)
-FROM '/home/ec2-user/Thomas-Service/shops.csv'
-DELIMITER ',' CSV HEADER;
+-- COPY shops(shopName)
+-- FROM '/home/ec2-user/Thomas-Service/shops.csv'
+-- DELIMITER ',' CSV HEADER;
 
-COPY products(productType,imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice)
-FROM '/home/ec2-user/Thomas-Service/products.csv'
-DELIMITER ',' CSV HEADER;
+-- COPY products(productType,imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice)
+-- FROM '/home/ec2-user/Thomas-Service/products.csv'
+-- DELIMITER ',' CSV HEADER;
