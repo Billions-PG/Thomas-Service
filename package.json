@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "start": "cservice --unhandled-rejections=strict ./server/routes.js --accessKey lksjdf982734",
+    "start": "cservice --unhandled-rejections=strict ./server/index.js --accessKey lksjdf982734",
+    "start:local": "./server/index.js",
     "lint": "./node_modules/.bin/eslint . --ignore-path ./.eslintignore --fix",
     "seed": "node data/item.js",
     "build": "webpack --config webpack.config.js",

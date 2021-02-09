@@ -3,14 +3,30 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const {Pool} = require('pg');
+const {Pool, Client} = require('pg');
+
+// const client = new Client({
+//   user: 'postgres',
+//   password: '',
+//   host: 'localhost',
+//   database: 'billionspg',
+//   port: 5432,
+// });
+
+// client.connect();
+
+// client.query('SELECT NOW()', (err, res) => {
+//   // console.log(err, res);
+//   client.end;
+// });
 
 const pool = new Pool({
-  user: 'thomasmcnutt',
-  host: 'localhost',
+  user: 'postgres',
+  host: '50.18.76.168',
   database: 'billionspg',
+  password: '',
   port: 5432,
-})
+});
 
 const app = express();
 
@@ -47,6 +63,7 @@ app.get('/api/product/:id', async (req, res) => {
   }
 
   const product = await pool.query('SELECT * FROM products WHERE id = $1', [req.params.id]);
+  console.log(product);
   //get product by id
   await Promise.all(product.rows.map(async(product) => {
   //get shop name
@@ -66,35 +83,4 @@ app.get('/api/product/:id', async (req, res) => {
   res.status(200).send(response);
 });
 
-//randomizer randomizes which images will show up first.
-// const randomizeArray = (arr) => {
-//   const res = [];
-//   const leng = arr.length;
-//   while (res.length !== leng) {
-//     const index = Math.floor(Math.random() * (arr.length));
-//     res.push(arr[index]);
-//     arr.splice(index, 1);
-//   }
-//   return res;
-// };
-
-//get route grabs the same
-// app.get('/product/:id', (req, res) => {
-//   Item.findById(req.params.id, 'shopName similarProduct').exec()
-//     .then((data) => {
-//       Item.find({ shopName: data.shopName }).exec()
-//         .then((shops) => {
-//           Item.find({ _id: { $in: data.similarProduct } }).exec((err, sim) => {
-//             console.log('sim length', sim[0], 'shops length', shops[0]);
-//             // const similarItems = randomizeArray(sim);
-//             const similarItems = sim;
-//             // const similarShops = randomizeArray(shops);
-//             const similarShops = shops;
-//             if (err) res.status(400).send(err);
-//             res.status(200).send([similarItems, similarShops]);
-//           });
-//         });
-//     });
-// });
-
-module.exports = app;
+app.listen(process.env.PORT || 3003);
