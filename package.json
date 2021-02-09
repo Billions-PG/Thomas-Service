@@ -10,7 +10,7 @@
     "seed": "node data/item.js",
     "build": "webpack --config webpack.config.js",
     "dev": "webpack -w",
-    "schema": "psql -f ./database/schema.sql"
+    "schema": "psql -U postgres ./database/schema.sql"
   },
   "repository": {
     "type": "git",
