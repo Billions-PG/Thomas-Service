@@ -33,9 +33,9 @@ CONSTRAINT fk_shop
 
 COPY shops(shopName)
 /root/Database/Thomas-Service
-FROM '/root/Database/Thomas-Service/shops.csv'
+FROM '/home/ec2-user/Thomas-Service/shops.csv'
 DELIMITER ',' CSV HEADER;
 
 COPY products(productType,imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice)
-FROM '/root/Database/Thomas-Serviceproducts.csv'
+FROM '/home/ec2-user/Thomas-Service/products.csv'
 DELIMITER ',' CSV HEADER;
