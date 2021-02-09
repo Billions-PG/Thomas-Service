@@ -168,7 +168,7 @@ const seedProducts = fs.createWriteStream('products.csv');
 seedProducts.write('productType,imageUrl,productName,displayPrice,onSale,worth,shippingDisplay,shippingEligibility,salePercentage,fk_shop_id,salePrice\n', 'utf8');
 
 function createAndWriteProducts(writer, encoding, callback) {
-  let i = 100;
+  let i = 10000000;
   let id = 0;
   function write() {
     let ok = true;
